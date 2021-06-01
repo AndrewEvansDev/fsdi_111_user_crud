@@ -6,6 +6,7 @@ from app import app # from the app package import the app variable
 from app.database import(
     create,
     scan,
+    update_user,
     delete_user
 )
 
@@ -35,10 +36,16 @@ def get_all_users():
 
 
 
-@app.route("/users/delete/<int:user>", methods=["DELETE"])
+@app.route("/remove/<int:user>", methods=["POST"])
 def delete(user):
     delete_user(user)
     return "%s was deleted." % user
+
+
+@app.route("/update/<int:user>/<key>/<val>")
+def update(val, key, user):
+    update_user(val, key, user)
+    return "The %s in %s was updated for %s" % val, key, user
 
 
 @app.route('/square/<int:number>')

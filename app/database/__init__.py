@@ -54,6 +54,16 @@ def delete_user(user_id):
         DELETE FROM user WHERE id=%s
     """ % user_id
     cursor = get_db()
-    cursor.execute(query, )
+    cursor.execute(query,())
+    cursor.commit()
+    return True
+
+
+def update_user(val, key, user_id):
+    query = """
+        UPDATE users SET %s = %s WHERE id=%s
+    """ % key, val, user_id
+    cursor = get_db()
+    cursor.execute(query,())
     cursor.commit()
     return True
