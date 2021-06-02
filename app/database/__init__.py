@@ -51,19 +51,25 @@ def create(first_name, last_name, hobbies):
 
 def delete_user(user_id):
     query = """
-        DELETE FROM user WHERE id=%s
-    """ % user_id
+        DELETE FROM user WHERE id=?
+    """
     cursor = get_db()
-    cursor.execute(query,())
+    cursor.execute(query,(user_id,))
     cursor.commit()
     return True
 
 
-def update_user(val, key, user_id):
+def update_user(user_id, fields: dict):
+    field_string = ", ".join(
+                    "%s=\"%s\"" % (key, val)
+                        for key, val
+                        in fields.items())
     query = """
-        UPDATE users SET %s = %s WHERE id=%s
-    """ % key, val, user_id
+            UPDATE user
+            SET %s
+            WHERE id = ?
+            """ % field_string
     cursor = get_db()
-    cursor.execute(query,())
+    cursor.execute(query, (user_id,))
     cursor.commit()
     return True

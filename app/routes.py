@@ -42,17 +42,11 @@ def delete(user):
     return "%s was deleted." % user
 
 
-@app.route("/update/<int:user>/<key>/<val>")
-def update(val, key, user):
-    update_user(val, key, user)
-    return "The %s in %s was updated for %s" % val, key, user
-
-
-@app.route('/square/<int:number>')
-def square(number):
-    return ("<h1>%s squared is %s</h1>"
-            % (number, number**2))
-
+@app.route("/users/<id>", methods=["PUT"])
+def update_user(id):
+    user_data = request.json
+    out = update_user(int(id), user_data)
+    return {"ok": out, "message": "Updated"}
         
 @app.route('/agent')
 def agent():
