@@ -23,8 +23,10 @@ def create():
     pprint(out.json())
 
 def test_update():
-    sample = ("hobbies","Golfing")                                                                                 "}
-    resp = requests.put("http://127.0.0.1:5000/users/14", json=sample)
+    sample = {"hobbies": "taking a bite out of crime"}
+    url = "http://127.0.0.1:5000/users/14"
+    #I've tried this in like 5 different configurations                                                                                "}
+    resp = requests.put(url , json=sample)
     pprint(resp.json())
 
 

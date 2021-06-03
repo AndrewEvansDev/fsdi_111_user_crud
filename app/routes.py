@@ -35,7 +35,6 @@ def get_all_users():
     }
 
 
-
 @app.route("/remove/<int:user>", methods=["POST"])
 def delete(user):
     delete_user(user)
@@ -43,11 +42,12 @@ def delete(user):
 
 
 @app.route("/users/<id>", methods=["PUT"])
-def update_user(id):
+def update(id):
     user_data = request.json
     out = update_user(int(id), user_data)
     return {"ok": out, "message": "Updated"}
-        
+
+
 @app.route('/agent')
 def agent():
     user_agent = request.headers.get("User-Agent")
